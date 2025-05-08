@@ -1,0 +1,31 @@
+{block content}
+<section class="relative flex items-center justify-center min-h-screen bg-gray-950 px-6 text-white">
+    <div class="absolute top-0 left-0 w-full h-full bg-cover bg-center z-0" style="background-image: url('{$basePath}/img/mountains.webp');">
+    </div>
+
+    <!-- Login Card -->
+    <div class="relative z-10 w-full max-w-md p-10 bg-white/10 backdrop-blur-xl rounded-2xl shadow-lg ring-1 ring-white/20">
+        <h2 class="text-3xl font-semibold text-center mb-8 tracking-tight">Přihlášení 🔐</h2>
+
+        <form n:name="signInForm" class="space-y-6">
+            <div>
+                <label class="block text-sm font-medium mb-1">E-mail</label>
+                <input type="email" n:name="email" class="w-full px-4 py-2 rounded-xl bg-white/20 text-white placeholder-gray-300 border border-white/30 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:bg-white/30 transition" required>
+            </div>
+
+            <div>
+                <label class="block text-sm font-medium mb-1">Heslo</label>
+                <input type="password" n:name="password" class="w-full px-4 py-2 rounded-xl bg-white/20 text-white placeholder-gray-300 border border-white/30 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:bg-white/30 transition" required>
+            </div>
+
+            <button n:name="send" class="w-full py-3 rounded-xl bg-gradient-to-r from-blue-600 to-indigo-700 text-white font-medium hover:from-blue-700 hover:to-indigo-800 shadow-md transition">
+                Přihlásit se
+            </button>
+        </form>
+
+        <p class="text-sm text-center text-gray-300 mt-6">
+            Nemáte účet? <a href="{$basePath}/register" class="text-blue-400 hover:underline">Zaregistrujte se</a>
+        </p>
+    </div>
+</section>
+{/block}

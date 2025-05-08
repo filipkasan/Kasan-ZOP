@@ -1,0 +1,30 @@
+{block content}
+<div class="min-h-screen bg-gray-900 text-white pt-28 px-6 max-w-6xl mx-auto">
+    <h1 class="text-4xl font-bold mb-8 text-center text-gray-100">Zaznamenané hodiny</h1>
+
+    <div class="overflow-x-auto rounded-2xl bg-gray-800/60 backdrop-blur-md shadow-xl">
+        <table class="min-w-full table-auto text-sm">
+            <thead>
+                <tr class="bg-gray-700 text-gray-300">
+                    <th class="py-4 px-6 text-left">Datum</th>
+                    <th class="py-4 px-6 text-left">Kategorie</th>
+                    <th class="py-4 px-6 text-left">Délka</th>
+                    <th class="py-4 px-6 text-left">Akce</th>
+                </tr>
+            </thead>
+            <tbody>
+                {foreach $hours as $hour}
+                    <tr class="border-t border-gray-700 hover:bg-gray-700 transition">
+                        <td class="py-4 px-6">{$hour['date']}</td>
+                        <td class="py-4 px-6">{$hour['category']}</td>
+                        <td class="py-4 px-6">{$hour['duration']} hodin</td>
+                        <td class="py-4 px-6">
+                            <a href="{link Hours:detail id => $hour['id']}" class="text-blue-400 hover:text-blue-300 transition">Zobrazit detail</a>
+                        </td>
+                    </tr>
+                {/foreach}
+            </tbody>
+        </table>
+    </div>
+</div>
+{/block}

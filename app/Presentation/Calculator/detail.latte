@@ -1,0 +1,28 @@
+{block content}
+<div class="min-h-screen bg-gray-900 text-white pt-28 px-6 max-w-3xl mx-auto">
+    <a href="{link Calculator:list}" class="text-blue-400 hover:underline text-sm">&larr; Zpět na přehled</a>
+
+    <div class="bg-gray-800/60 backdrop-blur-md rounded-2xl p-8 mt-6 shadow-2xl">
+        <h1 class="text-3xl font-bold mb-6 text-white">Detail záznamu</h1>
+
+        <div class="space-y-6 text-lg text-gray-300">
+            <div class="flex justify-between items-center">
+                <span class="font-semibold text-gray-100">📅 Datum:</span>
+                <span>{$hour['date']}</span>
+            </div>
+            <div class="flex justify-between items-center">
+                <span class="font-semibold text-gray-100">🕒 Délka:</span>
+                <span>{$hour['duration']} hodin</span>
+            </div>
+            <div class="flex justify-between items-center">
+                <span class="font-semibold text-gray-100">🏷️ Kategorie:</span>
+                <span>{$hour['category']}</span>
+            </div>
+            <div class="flex justify-between items-center">
+                <span class="font-semibold text-gray-100">📝 Popis:</span>
+                <span class="text-gray-200">{$hour['description']}</span>
+            </div>
+        </div>
+    </div>
+</div>
+{/block}

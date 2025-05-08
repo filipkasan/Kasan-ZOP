@@ -1,0 +1,33 @@
+{block content}
+    <div class="min-h-screen bg-gray-900 text-white pt-28 px-6 max-w-6xl mx-auto">
+        <h1 class="text-2xl font-bold mb-4">Seznam kategorií</h1>
+
+        <div class="mb-6">
+            <a href="{link Calculator:default}" class="inline-block bg-gray-700 hover:bg-gray-600 text-white font-semibold py-2 px-4 rounded transition">
+                ← Zpět na dashboard
+            </a>
+        </div>
+
+        {if $categories}
+            <ul class="space-y-3">
+                {foreach $categories as $category}
+                    <li class="p-4 rounded shadow border-l-4" style="border-left: 4px solid {$category->color};">
+                        <div class="flex justify-between items-center">
+                            <div>
+                                <span class="font-semibold text-lg">{$category->name}</span>
+                                <div class="text-sm text-gray-600">
+                                    Barva: <span class="inline-block w-4 h-4 rounded-full align-middle" style="background-color: {$category->color}"></span>
+                                    <span class="ml-2" color="({$category->color})">({$category->color})</span>
+                                </div>
+                                <a n:href="deleteCategory! id => $category['id']" onclick="return confirm('Opravdu chcete tento záznam smazat?')" class="text-red-400 hover:text-red-300 transition ml-2">Smazat</a>
+                            </div>
+
+                        </div>
+                    </li>
+                {/foreach}
+            </ul>
+        {else}
+            <p class="text-gray-600">Žádné kategorie k zobrazení.</p>
+        {/if}
+    </div>
+{/block}

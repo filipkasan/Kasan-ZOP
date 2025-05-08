@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="{$basePath}/Img/logo.png" type="image/png">
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <title>{ifset title}{include title|stripHtml} | {/ifset}Swiftmate🪽</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            color: #ffffff;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Přizpůsobení pro video pozadí */
+        .video-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1;
+        }
+
+        /* Průhledná navigace */
+        nav {
+            background-color: rgba(0, 0, 0, 0.3); /* průhledné pozadí */
+            backdrop-filter: blur(10px); /* rozostření pozadí */
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* stín */
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 50;
+        }
+
+        /* Základní styly pro odkazy */
+        nav a {
+            font-size: 1.125rem; /* větší písmo */
+            font-weight: 600; /* tučnější text */
+            color: #fff;
+            transition: color 0.3s, transform 0.3s, width 0.3s;
+            position: relative;
+            display: inline-block;
+        }
+
+        /* Hover efekt pro všechny odkazy - animace zleva doprava */
+        nav a:hover {
+            color: #fff;
+        }
+
+        /* Animace podtržení zleva doprava */
+        nav a::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: #4B92F3;
+            transition: width 0.3s ease-in-out;
+        }
+
+        nav a:hover::before {
+            width: 100%;
+        }
+
+        /* Styl pro odkaz "Log out" */
+        .logout-button {
+            color: #fff;
+            font-size: 1rem;
+            font-weight: 600;
+            transition: color 0.3s ease, transform 0.2s ease;
+            display: inline-block;
+            position: relative;
+        }
+
+        /* Hover efekt pro odkaz "Odhlásit" - červený */
+        .logout-button:hover {
+            color: #F06D6D; /* tlumená červená barva */
+            transform: translateY(-2px); /* efekt zvednutí při hover */
+        }
+
+        /* Podtržení pro "Odhlásit" - červené, ale jemnější */
+        .logout-button::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: #F06D6D; /* jemná červená */
+            transition: width 0.3s ease-in-out;
+        }
+
+        .logout-button:hover::before {
+            width: 100%;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #1a1a1a;
+            padding: 20px 0;
+            color: #fff;
+            text-align: center;
+        }
+
+        footer a {
+            color: #fff;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+
+<body class="bg-gray-900 font-sans text-white">
+
+    <!-- Navigace -->
+<nav class="px-6 py-4">
+    <div class="max-w-7xl mx-auto flex justify-between items-center">
+        <a href="{$basePath}/home">
+            <img src="{$basePath}/img/logo.png" alt="Logo" class="h-10">
+        </a>
+
+        <!-- Hamburger tlačítko (viditelné jen na mobilech) -->
+        <button id="hamburger" class="md:hidden text-white focus:outline-none" onclick="toggleMobileMenu()">
+            <svg class="h-8 w-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M4 6h16M4 12h16M4 18h16" />
+            </svg>
+        </button>
+
+        <!-- Menu - Desktop -->
+        <ul id="desktopMenu" class="hidden md:flex space-x-8">
+            <li><a href="{$basePath}/home" class="text-lg font-semibold text-white hover:text-gray-300">Domů</a></li>
+            <li><a href="{$basePath}/about" class="text-lg font-semibold text-white hover:text-gray-300">O nás</a></li>
+            <li><a href="{$basePath}/contact" class="text-lg font-semibold text-white hover:text-gray-300">Kontakt</a></li>
+            {if $user->isLoggedIn()}
+                {if $user->identity->role == 'admin'}
+                <li><a href="{$basePath}/admin" class="text-lg font-semibold text-white hover:text-gray-300">Admin</a></li>
+                {/if}
+                <li><a href="{$basePath}/calculator" class="text-lg font-semibold text-white hover:text-gray-300">Kalkulačka</a></li>
+                <li><a n:href="Login:out" class="logout-button">Odhlásit</a></li>
+                <li class="text-sm text-gray-300 italic self-center">
+                    <span class="text-white font-semibold">👤 {$user->identity->username}</span>
+                    
+                </li>
+            {else}
+                <li><a href="{$basePath}/login" class="login-button">Přihlásit</a></li>
+            {/if}
+        </ul>
+    </div>
+
+
+    <!-- Menu - Mobilní zobrazení -->
+    <ul id="mobileMenu" class="md:hidden mt-4 px-4 space-y-3 transform transition-transform duration-300 origin-top scale-y-0 hidden">
+        <li><a href="{$basePath}/home" class="block text-lg font-semibold text-white hover:text-gray-300">Domů</a></li>
+        <li><a href="{$basePath}/about" class="block text-lg font-semibold text-white hover:text-gray-300">O nás</a></li>
+        <li><a href="{$basePath}/contact" class="block text-lg font-semibold text-white hover:text-gray-300">Kontakt</a></li>
+        {if $user->isLoggedIn()}
+            <li><a href="{$basePath}/calculator" class="block text-lg font-semibold text-white hover:text-gray-300">Kalkulačka</a></li>
+            <li><a n:href="Login:out" class="logout-button">Odhlásit</a></li>
+            <li class="text-sm text-gray-300 italic">
+                <span class="text-white font-semibold">👤 {$user->identity->username}</span>
+            </li>
+        {else}
+            <li><a href="{$basePath}/login" class="login-button">Přihlásit</a></li>
+        {/if}
+    </ul>
+
+</nav>
+
+    <!-- Flash zprávy -->
+{foreach $flashes as $flash}
+    <div class="fixed bottom-4 right-4 w-80 p-4 mb-2 rounded-2xl shadow-lg 
+                {if $flash->type == 'success'}bg-green-500{elseif $flash->type == 'error'}bg-red-500{else}bg-blue-500{/if}
+                text-white opacity-90 transform transition-all duration-300 z-50 backdrop-blur-xl bg-white/10"
+         role="alert">
+        <div class="flex items-center justify-between">
+            <div class="flex-shrink-0">
+                <!-- Ikona pro úspěch, chybu nebo jiný typ -->
+                {if $flash->type == 'success'}
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                    </svg>
+                {elseif $flash->type == 'error'}
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                {/if}
+            </div>
+            <div class="ml-3 w-full">
+                <p>{$flash->message}</p>
+                <!-- Odpočet času -->
+                <div class="mt-2 h-1 bg-white/30 rounded-full">
+                    <div class="h-full bg-white/70 animate-pulse"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        setTimeout(() => {
+            const alertBox = document.querySelector('.fixed');
+            if (alertBox) alertBox.style.display = 'none';
+        }, 5000);
+    </script>
+{/foreach}
+
+    <!-- Obsah stránky -->
+    <main>
+        {include content}
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2025, Všechna práva vyhrazena</p>
+        <p><a href="{$basePath}/privacy">Ochrana osobních údajů</a> | <a href="{$basePath}/condition">Podmínky použití</a></p>
+    </footer>
+
+    {block scripts}
+    <script src="https://unpkg.com/nette-forms@3"></script>
+    {/block}
+
+    <script>
+    function toggleMobileMenu() {
+        const mobileMenu = document.getElementById('mobileMenu');
+        mobileMenu.classList.toggle('hidden');
+    }
+
+    const mobileMenu = document.getElementById('mobileMenu');
+
+    function toggleMobileMenu() {
+        if (mobileMenu.classList.contains('hidden')) {
+            mobileMenu.classList.remove('hidden');
+            setTimeout(() => {
+                mobileMenu.classList.remove('scale-y-0');
+                mobileMenu.classList.add('scale-y-100');
+            }, 10);
+        } else {
+            mobileMenu.classList.remove('scale-y-100');
+            mobileMenu.classList.add('scale-y-0');
+            setTimeout(() => {
+                mobileMenu.classList.add('hidden');
+            }, 300); // počkej, až skončí animace
+        }
+    }
+</script>
+</body>
+</html>

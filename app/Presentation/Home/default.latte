@@ -1,0 +1,108 @@
+{block content}
+<!-- Hero sekce -->
+<section class="relative flex flex-col justify-center items-center text-center min-h-screen px-6">
+    <!-- Video na pozadí -->
+    <video id="background-video" autoplay muted loop playsinline preload="auto" class="absolute top-0 left-0 w-full h-full object-cover z-[-1]" poster="{$basePath}/Video/town.jpg">
+        <source src="{$basePath}/Video/town.mp4" type="video/mp4">
+        <source src="{$basePath}/Video/town.webm" type="video/webm">
+        Tvůj prohlížeč nepodporuje přehrávání videa.
+    </video>
+
+    <!-- Obsah -->
+    <h1 class="text-4xl md:text-6xl font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-gray-300 to-white">
+        &lt/ Swiftmate time tracker >
+    </h1>
+    <p class="text-lg md:text-xl text-gray-200 mt-4 max-w-2xl">
+        S naším nástrojem získáte plnou kontrolu nad svým pracovním časem.
+    </p>
+</section>
+
+<!-- Sekce o projektu -->
+<section class="py-20 px-6 bg-gray-900 text-white">
+    <div class="max-w-7xl w-full flex flex-col md:flex-row items-center justify-between">
+        <!-- Obrázek vlevo -->
+        <div class="w-full md:w-1/2 mb-8 md:mb-0">
+            <img src="{$basePath}/Img/clock.svg" alt="Ilustrace projektu" class="mx-auto rounded-lg shadow-lg">
+        </div>
+
+        <!-- Text vpravo -->
+        <div class="w-full md:w-1/2 text-center md:text-left md:pl-12">
+            <h2 class="text-3xl md:text-4xl font-bold">Efektivní organizace času</h2>
+            <p class="text-lg md:text-xl text-gray-400 mt-4">
+                SwiftMate vám poskytne intuitivní nástroj pro sledování pracovního času, což vám pomůže lépe plánovat a efektivně využívat každou minutu. Ať už jste student nebo profesionál, naše aplikace je ideálním řešením pro správu času.
+            </p>
+            <p class="text-lg md:text-xl text-gray-400 mt-4">
+                Užijte si minimalistický design a snadné ovládání. Vše, co potřebujete pro správu pracovních hodin, máte na dosah ruky.
+            </p>
+        </div>
+    </div>
+</section>
+
+<!-- Sekce s funkcemi -->
+<section class="py-24 px-6 bg-gradient-to-b from-gray-900 to-black text-white">
+    <div class="max-w-5xl mx-auto text-center">
+        <h2 class="text-4xl md:text-5xl font-extrabold tracking-tight">Proč právě SwiftMate?</h2>
+        <p class="text-lg md:text-xl text-gray-400 mt-6 max-w-2xl mx-auto">
+            Rychlé a přesné zaznamenávání času, elegantní design a jednoduché nastavení – to vše v jednom nástroji pro vaše efektivní řízení času.
+        </p>
+    </div>
+
+    <div class="mt-16 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-10 text-center">
+        <!-- Funkce 1 -->
+        <div class="p-8 bg-gray-800/50 rounded-xl shadow-lg hover:shadow-2xl transition duration-300 hover:-translate-y-2">
+            <h3 class="text-2xl font-semibold">⏳ Přesný odpočet</h3>
+            <p class="text-gray-400 mt-3 leading-relaxed">
+                Každá sekunda je pečlivě zaznamenána s maximální přesností, abyste měli vždy přehled o svém pracovním čase.
+            </p>
+        </div>
+
+        <!-- Funkce 2 -->
+        <div class="p-8 bg-gray-800/50 rounded-xl shadow-lg hover:shadow-2xl transition duration-300 hover:-translate-y-2">
+
+            <h3 class="text-2xl font-semibold">🎨 Elegantní vzhled</h3>
+            <p class="text-gray-400 mt-3 leading-relaxed">
+                Design inspirovaný moderními trendy – čisté linie a sofistikované uživatelské rozhraní pro lepší zážitek.
+            </p>
+        </div>
+
+        <!-- Funkce 3 -->
+        <div class="p-8 bg-gray-800/50 rounded-xl shadow-lg hover:shadow-2xl transition duration-300 hover:-translate-y-2">
+
+            <h3 class="text-2xl font-semibold">📅 Snadné nastavení</h3>
+            <p class="text-gray-400 mt-3 leading-relaxed">
+                Začněte ihned! Stačí zadat datum a čas, aplikace se postará o zbytek – bez složitých nastavení.
+            </p>
+        </div>
+    </div>
+</section>
+
+<!-- Sekce pro přihlášení -->
+<section class="relative flex justify-center items-center min-h-screen w-full bg-gray-900">
+    <!-- Obrázek na pozadí -->
+    <div class="absolute top-0 left-0 w-full h-full bg-cover bg-center z-0" style="background-image: url('{$basePath}/img/ggate.jpg');">
+    </div>
+
+    <!-- Obsah -->
+    <div class="relative text-center text-gray-800 px-6 py-12 z-10">
+        <!-- Overlay s efektem blur -->
+        <div class="absolute inset-0 bg-white/30 backdrop-blur-md rounded-lg z-0"></div>
+
+        <div class="relative z-10">
+            <h2 class="text-3xl md:text-4xl font-extrabold mb-6">Začněte s námi!</h2>
+            <p class="text-lg md:text-xl text-gray-600 mb-6">
+                Přihlaste se nebo vytvořte nový účet a začněte využívat všechny výhody naší kalkulačky.
+            </p>
+
+            <!-- Tlačítko pro přihlášení -->
+            <a href="{$basePath}/login" class="inline-block px-8 py-3 text-lg font-semibold text-white bg-gradient-to-r from-blue-500 to-blue-600 rounded-full shadow-lg transition-colors duration-300 hover:bg-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-400">
+                Přihlásit se
+            </a>
+
+            <p class="mt-4 text-gray-600">
+                Nemáte účet? <a href="{$basePath}/register" class="text-blue-500 hover:underline">Vytvořte účet</a>
+            </p>
+        </div>
+    </div>
+</section>
+
+{/block}

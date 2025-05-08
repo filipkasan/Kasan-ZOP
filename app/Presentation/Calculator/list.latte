@@ -1,0 +1,39 @@
+{block content}
+<div class="min-h-screen bg-gray-900 text-white pt-28 px-6 max-w-6xl mx-auto">
+    <h1 class="text-4xl font-bold mb-8 text-center text-gray-100">Zaznamenané hodiny</h1>
+
+    <div class="mb-6">
+        <a href="{link Calculator:default}" class="inline-block bg-gray-700 hover:bg-gray-600 text-white font-semibold py-2 px-4 rounded transition">
+            ← Zpět na dashboard
+        </a>
+    </div>
+
+    <div class="overflow-x-auto rounded-2xl bg-gray-800/60 backdrop-blur-md shadow-xl">
+        <table class="min-w-full table-auto text-sm">
+            <thead>
+                <tr class="bg-gray-700 text-gray-300">
+                    <th class="py-4 px-6 text-left">Datum</th>
+                    <th class="py-4 px-6 text-left">poznámka</th>
+                    <th class="py-4 px-6 text-left">Kategorie</th>
+                    <th class="py-4 px-6 text-left">Délka</th>      
+                    <th class="py-4 px-6 text-left">Akce</th>
+                </tr>
+            </thead>
+            <tbody>
+                {foreach $hours as $hour}
+                    <tr class="border-t border-gray-700 hover:bg-gray-700 transition">
+                        <td class="py-4 px-6">{$hour['date']}</td>
+                        <td class="py-4 px-6">{$hour['note']}</td>
+                        <td class="py-4 px-6">{$hour['category']}</td>
+                        <td class="py-4 px-6">{$hour['duration']} hodin</td>
+                        <td class="py-4 px-6">
+                            <a href="{link Calculator:detail id => $hour['id']}" class="text-blue-400 hover:text-blue-300 transition">Zobrazit detail</a>
+                            <a n:href="delete! id => $hour['id']" onclick="return confirm('Opravdu chcete tento záznam smazat?')" class="text-red-400 hover:text-red-300 transition ml-2">Smazat</a>
+                        </td>
+                    </tr>
+                {/foreach}
+            </tbody>
+        </table>
+    </div>
+</div>
+{/block}
